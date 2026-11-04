@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f7f9" />
+    <meta name="description" content="텍스트를 다이어그램으로. 13가지 예제와 실시간 Mermaid 편집, 검증, SVG·PNG 내보내기를 제공하는 다이어그램 스튜디오." />
+    <title>Mermaid Studio — Diagram as Code</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#flowchart-td"><span class="brand-mark">m<span>◦</span></span><span>mermaid<span class="brand-sub">STUDIO</span></span></a>
+      <div class="workspace"><span class="workspace-icon">M</span><span>My workspace<small>Personal workspace</small></span><i data-lucide="chevrons-up-down"></i></div>
+      <label class="search"><i data-lucide="search"></i><input id="search" placeholder="다이어그램 검색" aria-label="다이어그램 검색"/><kbd>/</kbd></label>
+      <div class="nav-heading">DIAGRAM LIBRARY <span id="library-count">13</span></div>
+      <nav id="diagram-nav" aria-label="다이어그램 종류"></nav>
+      <div class="sidebar-bottom"><div class="module-note"><span class="note-icon"><i data-lucide="blocks"></i></span><strong>작게 만들고, 넓게 연결하세요.</strong><p>하나의 다이어그램을 문서, 웹,<br/>자동화 워크플로에 재사용하세요.</p><button id="module-help">모듈 사용 가이드 <i data-lucide="arrow-up-right"></i></button></div><a href="https://github.com/DevOps0906/Mermaid.js-Module" target="_blank" rel="noreferrer"><i data-lucide="github"></i> GitHub repository <i data-lucide="arrow-up-right"></i></a><div class="version"><span class="dot"></span> Mermaid.js 12.3.0 <span>v1.0</span></div></div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar"><div class="breadcrumb"><button class="icon-button menu-toggle" id="menu-toggle" aria-label="메뉴 열기"><i data-lucide="menu"></i></button><i data-lucide="panels-top-left"></i><span>Workspace</span><span class="slash">/</span><strong>Diagram playground</strong></div><div class="top-actions"><span class="local-badge"><span class="dot"></span> 브라우저에 자동 저장</span><a class="icon-button" href="https://mermaid.js.org/intro/" target="_blank" rel="noreferrer" aria-label="Mermaid 공식 문서"><i data-lucide="book-open"></i></a><span class="avatar">M</span></div></header>
+      <main>
+        <div class="page-intro"><div><div class="eyebrow"><span></span> DIAGRAM AS CODE</div><h1>생각의 흐름을, 다이어그램으로.</h1><p>텍스트로 그리는 구조와 연결. 예제를 선택하고 나만의 다이어그램을 완성하세요.</p></div><button class="button" id="import-button"><i data-lucide="upload"></i> 코드 가져오기</button><input id="import-file" type="file" accept=".mmd,.md,.txt" hidden/></div>
+        <section class="stats" aria-label="스튜디오 기능"><div><span class="stat-icon lilac"><i data-lucide="shapes"></i></span><span><strong>13<span>가지 다이어그램</span></strong><small>프로세스부터 데이터 시각화까지</small></span></div><div><span class="stat-icon mint"><i data-lucide="zap"></i></span><span><strong>실시간 렌더링</strong><small>코드를 수정하면 바로 미리보기</small></span><span class="live-tag">LIVE</span></div><div><span class="stat-icon blue"><i data-lucide="package-open"></i></span><span><strong>하나의 코드, 다양한 출력</strong><small>SVG · PNG · PDF · Mermaid</small></span></div></section>
+        <section class="studio">
+          <div class="studio-heading"><div class="diagram-title"><span class="title-icon" id="title-icon"></span><div><div class="title-line"><h2 id="diagram-title"></h2><span class="tag">PLAYGROUND</span></div><p id="diagram-description"></p></div></div><button class="button primary" id="export-button"><i data-lucide="download"></i> 내보내기 <i data-lucide="chevron-down"></i></button><div class="export-menu" id="export-menu" hidden><button data-export="svg">SVG 벡터 이미지</button><button data-export="png">PNG 이미지 (2×)</button><button data-export="pdf">PDF / 인쇄</button><button data-export="mmd">Mermaid 원본 (.mmd)</button></div></div>
+          <div class="preset-row"><span>예제 템플릿</span><div id="presets"></div><span class="preset-hint"><i data-lucide="mouse-pointer-2"></i> 예제로 빠르게 시작하세요</span></div>
+          <div class="editor-grid">
+            <section class="code-pane"><div class="pane-toolbar"><span><i data-lucide="code-2"></i> Mermaid 코드 <span class="file-tag">.mmd</span></span><div><button class="icon-button" id="reset" title="현재 예제 초기화" aria-label="현재 예제 초기화"><i data-lucide="rotate-ccw"></i></button><button class="icon-button" id="copy" title="코드 복사" aria-label="코드 복사"><i data-lucide="copy"></i></button></div></div><div class="editor-wrap"><pre class="line-numbers" id="line-numbers" aria-hidden="true"></pre><textarea id="code" spellcheck="false" aria-label="Mermaid 코드 편집기"></textarea></div><div class="code-footer"><span><span class="dot"></span> UTF-8 <span class="footer-divider">|</span> <span id="line-count"></span></span><span>수동 실행 <kbd>Ctrl ↵</kbd></span></div></section>
+            <section class="preview-pane"><div class="pane-toolbar"><span><i data-lucide="scan-eye"></i> 미리보기 <span class="valid-badge" id="valid-badge">검증 중</span></span><label class="auto-toggle"><input type="checkbox" id="auto-render" checked/><span></span> 자동 렌더링</label></div><div class="diagram-canvas" id="canvas"><div id="diagram" role="img" aria-label="다이어그램 미리보기"></div><div class="canvas-controls"><button class="icon-button" id="zoom-out" aria-label="축소"><i data-lucide="minus"></i></button><span id="zoom-label">100%</span><button class="icon-button" id="zoom-in" aria-label="확대"><i data-lucide="plus"></i></button><span class="control-divider"></span><button class="icon-button" id="fit" aria-label="크기 초기화"><i data-lucide="maximize"></i></button><button class="icon-button" id="fullscreen" aria-label="전체 화면"><i data-lucide="expand"></i></button></div></div><div class="preview-footer"><span id="render-status" role="status">렌더링 준비 중</span><span>SVG · Vector rendering</span></div></section>
+          </div>
+          <div class="error-panel" id="error" role="alert" hidden></div>
+          <div class="studio-bottom"><span><i data-lucide="info"></i> Markdown의 Mermaid 코드 블록도 그대로 붙여넣을 수 있어요.</span><div><label for="theme">테마</label><select id="theme"><option value="studio">Studio light</option><option value="dark">Dark</option><option value="forest">Forest</option><option value="neutral">Neutral</option></select><button class="button small" id="render"><i data-lucide="play"></i> 렌더링</button></div></div>
+        </section>
+        <section class="details-grid"><article class="detail-card"><div class="card-heading"><span class="mini-icon"><i data-lucide="lightbulb"></i></span><h3>이런 곳에 활용해 보세요</h3><span class="subtle">USE CASES</span></div><div class="use-cases" id="use-cases"></div></article><article class="detail-card syntax-card"><div class="card-heading"><span class="mini-icon purple"><i data-lucide="terminal"></i></span><h3>작은 문법 가이드</h3><a id="syntax-doc" target="_blank" rel="noreferrer">공식 문서 <i data-lucide="arrow-up-right"></i></a></div><div id="syntax-guide"></div></article></section>
+        <footer class="page-footer"><span><span class="footer-logo">m◦</span> 텍스트는 간결하게. 구조는 명확하게.</span><span>Built with Mermaid.js <span class="footer-divider">/</span> Designed for your workflow</span></footer>
+      </main>
+    </div>
+    <div id="toast" role="status" hidden></div>
+    <dialog id="guide"><div class="dialog-heading"><h2>다른 프로젝트에서도 그대로.</h2><button class="icon-button" id="close-guide" aria-label="가이드 닫기"><i data-lucide="x"></i></button></div><p>독립된 렌더러를 가져와 HTML 요소에 연결하세요.</p><pre>import { createDiagramRenderer } from './src/renderer.js';
+
+const renderer = createDiagramRenderer();
+await renderer.render(element, 'flowchart LR\n A --> B');</pre><p>render()는 검증 후 SVG를 적용하고, 오류가 있으면 마지막 정상 결과를 유지합니다. 상세한 연동 방법과 범위는 README를 확인하세요.</p><a class="button primary" href="https://github.com/DevOps0906/Mermaid.js-Module#readme" target="_blank" rel="noreferrer">README 열기 <i data-lucide="arrow-up-right"></i></a></dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

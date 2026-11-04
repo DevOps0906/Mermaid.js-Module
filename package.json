@@ -1,0 +1,21 @@
+{
+  "name": "mermaid-diagram-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite --host 127.0.0.1 --open",
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "lucide": "0.468.0",
+    "mermaid": "12.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "vite": "8.3.5"
+  }
+}
